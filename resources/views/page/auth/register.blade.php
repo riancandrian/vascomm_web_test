@@ -24,8 +24,9 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Register a new membership</p>
 
-      <form action="{{ route('register') }}" method="post">
+      <form action="{{ route('register') }}" method="post" enctype="multipart/form-data">
           @csrf
+
         <div class="input-group mb-3">
           <input type="text" class="form-control" name="name" placeholder="Full name">
           <div class="input-group-append">
@@ -34,6 +35,10 @@
             </div>
           </div>
         </div>
+        @error('name')
+        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+        @enderror
+
         <div class="input-group mb-3">
           <input type="email" class="form-control" name="email" placeholder="Email">
           <div class="input-group-append">
@@ -42,6 +47,10 @@
             </div>
           </div>
         </div>
+        @error('email')
+        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+        @enderror
+
         <div class="input-group mb-3">
           <input type="password" class="form-control" name="password" placeholder="Password">
           <div class="input-group-append">
@@ -50,6 +59,10 @@
             </div>
           </div>
         </div>
+        @error('password')
+        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+        @enderror
+
         <div class="input-group mb-3">
           <input type="password" class="form-control" name="password_confirmation" placeholder="Retype password">
           <div class="input-group-append">
@@ -58,6 +71,15 @@
             </div>
           </div>
         </div>
+
+        <div class="">
+          <input type="file" class="form-control" name="picture">
+          <br>
+          @error('picture')
+          <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+          @enderror
+        </div>
+
         <div class="row">
           
           <!-- /.col -->
