@@ -13,18 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
-
-Route::get('/', function () {
-    return view('page.auth.login');
-});
-
-Route::get('/users', function () {
-    return view('user');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm']);
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
+});
